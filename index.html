@@ -917,6 +917,171 @@
   .pflow-title { font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px; }
   .pflow-desc { font-size:12px;color:var(--text-secondary);line-height:1.5; }
 
+  /* ========== METRICS / COMPARISON TABLE ========== */
+  .metrics-section {
+    background: var(--gray-50);
+    padding: 110px 24px;
+  }
+  .metrics-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .metrics-header .section-tag { justify-content: center; }
+  .metrics-header .section-tag::before { display: none; }
+  .metrics-header .section-sub { margin: 0 auto; }
+
+  .comp-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-xl);
+    box-shadow: 0 4px 40px rgba(10,26,53,0.08);
+    border: 1px solid var(--gray-100);
+  }
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    min-width: 640px;
+  }
+  .comp-table thead tr {
+    background: var(--navy);
+  }
+  .comp-th-metric, .comp-th-before, .comp-th-after {
+    padding: 20px 24px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5);
+  }
+  .comp-th-metric { width: 35%; }
+  .comp-th-before, .comp-th-after { width: 32.5%; }
+
+  .col-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .col-badge-before {
+    background: rgba(248,113,113,0.12);
+    color: #f87171;
+    border: 1px solid rgba(248,113,113,0.25);
+  }
+  .col-badge-after {
+    background: rgba(20,184,166,0.12);
+    color: var(--teal);
+    border: 1px solid rgba(20,184,166,0.25);
+  }
+
+  .comp-row {
+    border-bottom: 1px solid var(--gray-100);
+    transition: background 0.2s;
+  }
+  .comp-row:last-child { border-bottom: none; }
+  .comp-row:hover { background: rgba(20,184,166,0.03); }
+  .comp-row:hover .comp-after { background: rgba(20,184,166,0.05); }
+
+  .comp-metric {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    vertical-align: middle;
+  }
+  .comp-metric-icon {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    background: rgba(20,184,166,0.08);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .comp-metric-icon svg { width: 16px; height: 16px; color: var(--teal); }
+  .comp-metric-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+  .comp-metric-sub { font-size: 11px; color: var(--text-secondary); }
+
+  .comp-before, .comp-after {
+    padding: 20px 24px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+  .comp-after {
+    color: var(--navy);
+    background: rgba(20,184,166,0.02);
+    border-left: 2px solid rgba(20,184,166,0.15);
+    transition: background 0.2s;
+  }
+
+  .comp-tag-bad {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(248,113,113,0.1);
+    color: #ef4444;
+    border: 1px solid rgba(248,113,113,0.2);
+  }
+  .comp-tag-good {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 3px 10px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(20,184,166,0.1);
+    color: var(--teal);
+    border: 1px solid rgba(20,184,166,0.25);
+  }
+
+  /* Summary stat strip */
+  .metrics-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 48px;
+    background: var(--navy);
+    border-radius: var(--radius-xl);
+    padding: 40px 32px;
+  }
+  .msumm-card {
+    flex: 1;
+    min-width: 160px;
+    text-align: center;
+    padding: 0 24px;
+  }
+  .msumm-val {
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .msumm-label {
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.4;
+  }
+  .msumm-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  @media(max-width: 640px) {
+    .msumm-divider { display: none; }
+    .msumm-card { min-width: 50%; padding: 16px; }
+    .metrics-summary { gap: 0; }
+  }
+
 </style>
 </head>
 <body>
@@ -959,14 +1124,16 @@
         <a href="https://login.sentrictechnologies.in/login">
         <button class="btn-primary ripple-btn" onclick="rippleEffect(event)">Get Started →</button>
         </a>
-        <button class="btn-ghost">
-          <span class="play-icon">
-            <svg viewBox="0 0 16 16" fill="currentColor" width="10" height="10">
-              <polygon points="4,2 14,8 4,14"/>
-            </svg>
-          </span>
-          See Demo
-        </button>
+        <a href="mailto:vitallink.system@gmail.com?subject=Demo%20Request%20%E2%80%94%20Vital-Link" style="text-decoration:none;">
+          <button class="btn-ghost">
+            <span class="play-icon">
+              <svg viewBox="0 0 16 16" fill="currentColor" width="10" height="10">
+                <polygon points="4,2 14,8 4,14"/>
+              </svg>
+            </span>
+            See Demo
+          </button>
+        </a>
       </div>
       <div class="hero-stats">
         <div class="hstat">
@@ -1478,6 +1645,151 @@
   </div>
 </section>
 
+<!-- ====== METRICS / COMPARISON TABLE ====== -->
+<section class="metrics-section" id="stats">
+  <div class="container">
+    <div class="metrics-header reveal">
+      <div class="section-tag">Platform Metrics</div>
+      <h2 class="section-title">The Vital-Link difference,<br><em style="color:var(--teal);font-style:italic">in numbers</em></h2>
+      <p class="section-sub">A side-by-side look at traditional healthcare operations versus Vital-Link — across response time, monitoring coverage, outbreak detection, and more.</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="comp-table-wrap reveal">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th class="comp-th-metric">Metric</th>
+            <th class="comp-th-before">
+              <span class="col-badge col-badge-before">❌ Without Vital-Link</span>
+            </th>
+            <th class="comp-th-after">
+              <span class="col-badge col-badge-after">✅ With Vital-Link</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Patient Monitoring</div>
+                <div class="comp-metric-sub">Coverage & continuity</div>
+              </div>
+            </td>
+            <td class="comp-before">Periodic manual checks<br><span class="comp-tag-bad">Every 4–6 hours</span></td>
+            <td class="comp-after">Continuous 24/7 streaming<br><span class="comp-tag-good">Every 5 seconds</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Emergency Response Time</div>
+                <div class="comp-metric-sub">Alert → Ambulance dispatch</div>
+              </div>
+            </td>
+            <td class="comp-before">Manual call chain<br><span class="comp-tag-bad">8–15 minutes avg</span></td>
+            <td class="comp-after">Automated AI dispatch<br><span class="comp-tag-good">&lt; 30 seconds</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Ambulance Tracking</div>
+                <div class="comp-metric-sub">Hospital visibility of fleet</div>
+              </div>
+            </td>
+            <td class="comp-before">Phone calls for updates<br><span class="comp-tag-bad">No real-time visibility</span></td>
+            <td class="comp-after">Live GPS on dashboard<br><span class="comp-tag-good">Sub-second updates</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Outbreak Detection</div>
+                <div class="comp-metric-sub">Time before clinical reporting</div>
+              </div>
+            </td>
+            <td class="comp-before">After hospital admissions spike<br><span class="comp-tag-bad">0 days early warning</span></td>
+            <td class="comp-after">AI flags biometric anomalies<br><span class="comp-tag-good">Up to 14 days early</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Hospital Bed Management</div>
+                <div class="comp-metric-sub">Capacity planning accuracy</div>
+              </div>
+            </td>
+            <td class="comp-before">Spreadsheets & manual logs<br><span class="comp-tag-bad">Reactive, error-prone</span></td>
+            <td class="comp-after">AI-predicted capacity planning<br><span class="comp-tag-good">Proactive & real-time</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-8"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Data & Analytics</div>
+                <div class="comp-metric-sub">Patient data availability</div>
+              </div>
+            </td>
+            <td class="comp-before">Fragmented, siloed records<br><span class="comp-tag-bad">Hours to consolidate</span></td>
+            <td class="comp-after">Unified real-time dashboard<br><span class="comp-tag-good">Instant access, anywhere</span></td>
+          </tr>
+          <tr class="comp-row">
+            <td class="comp-metric">
+              <div class="comp-metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div>
+                <div class="comp-metric-title">Platform Uptime</div>
+                <div class="comp-metric-sub">System availability SLA</div>
+              </div>
+            </td>
+            <td class="comp-before">On-premise servers<br><span class="comp-tag-bad">~95% uptime typical</span></td>
+            <td class="comp-after">Cloud-native, redundant infra<br><span class="comp-tag-good">99.9% uptime SLA</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Summary stat row -->
+    <div class="metrics-summary reveal">
+      <div class="msumm-card">
+        <div class="msumm-val">40%</div>
+        <div class="msumm-label">Faster Emergency Response</div>
+      </div>
+      <div class="msumm-divider"></div>
+      <div class="msumm-card">
+        <div class="msumm-val">14 days</div>
+        <div class="msumm-label">Earlier Outbreak Detection</div>
+      </div>
+      <div class="msumm-divider"></div>
+      <div class="msumm-card">
+        <div class="msumm-val">99.9%</div>
+        <div class="msumm-label">Platform Uptime SLA</div>
+      </div>
+      <div class="msumm-divider"></div>
+      <div class="msumm-card">
+        <div class="msumm-val">&lt; 30s</div>
+        <div class="msumm-label">Ambulance Dispatch Time</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ====== CTA ====== -->
 <section class="cta-section" id="cta">
   <div class="cta-bg"></div>
@@ -1485,12 +1797,14 @@
     <div class="cta-eyebrow reveal">Ready to transform care delivery?</div>
     <h2 class="cta-title reveal">Build the Future<br>of Healthcare</h2>
     <p class="cta-sub reveal">Join the hospitals, emergency services, and health systems already deploying Vital-Link wearables and AI platform to save time, predict outbreaks, and save lives.</p>
-    <button class="btn-demo ripple-btn reveal" onclick="rippleEffect(event)">
-      Request Demo
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-        <path d="M3 8h10M9 4l4 4-4 4"/>
-      </svg>
-    </button>
+    <a href="mailto:vitallink.system@gmail.com?subject=Demo%20Request%20%E2%80%94%20Vital-Link" style="text-decoration:none;">
+      <button class="btn-demo ripple-btn reveal" onclick="rippleEffect(event)">
+        Request Demo
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+          <path d="M3 8h10M9 4l4 4-4 4"/>
+        </svg>
+      </button>
+    </a>
     
     </div>
   </div>
@@ -1501,13 +1815,14 @@
   <div class="footer-inner">
     <div class="footer-brand">
       <a href="#" class="nav-logo1" style="margin-bottom:0">
-        <div class="nav-logo-icon">
-  <img src="logo.png" 
-       alt="Vital-Link Logo" 
-       width="40" 
-       height="40">
+         <div class="nav-logo-icon">
+        <img src="logo.png"
+             alt="Vital-Link Logo"
+             width="56"
+             height="56"
+             style="display:block;">
 </div>
-        Vital-Link
+            Vital-Link
       </a>
       <p>Wearable biosensors + AI intelligence for hospitals, emergency services, and patients — built for the critical moments.</p>
     </div>
@@ -1578,8 +1893,7 @@
     ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
     btn.appendChild(ripple);
     setTimeout(() => ripple.remove(), 600);
-    let userInput = alert("Please send us an email at: vitallink.system@gmail.com")
-  }
+    }
 
   // ====== USE CASE TAGS ======
   document.querySelectorAll('.uc-tag').forEach(tag => {
